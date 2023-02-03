@@ -1,4 +1,4 @@
-Drugi projekt iz predmeta Raspodijeljeni sustavi 
+Drugi projekt iz predmeta Raspodijeljeni sustavi
 
 Korišteni programi:
 
