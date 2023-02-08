@@ -2,8 +2,7 @@ import asyncio
 import aiohttp
 import pandas as pd
 
-# Proba s 10 za pocetak
-ClientIDs  = list(range(1, 11))
+ClientIDs  = list(range(1, 10001))
 
 print("\n Učitavam dataset...")
 Dataset = pd.read_json("FakeDataset.json", lines = True)
@@ -31,5 +30,13 @@ async def klijent():
 		print("\n Podaci poslani! \n")
 		Results = await asyncio.gather(*Tasks)
 		Results = [await res.json() for res in Results]
+		print("Prikaz rezultata obrađenih podataka svih klijenata. \n")
 
 asyncio.get_event_loop().run_until_complete(klijent())
+
+Data = {}
+for result in Results:
+	if "client" in result and "averageWordcount" in result:
+		print("Duljina koda klijenta ID: ", result.get("client"), "iznosi: ", result.get("averageWordcount"))
+	else:
+		print("Error: 'client' ili 'averageWordcount' se ne nalaze u polju result")

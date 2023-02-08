@@ -9,7 +9,7 @@ from aiohttp import web
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s]: %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
 SampleSize = 1000
-MaxTasks = 10
+MaxTasks = 10000
 RecievedReq, ReturnedRes = 0, 0
 TasksSent, TasksCompleted = 0, 0
 
@@ -53,7 +53,7 @@ async def master(request):
 			# Dohvaćanje obrađenih taskova i status dovršenih taskova
 			Results = await asyncio.gather(*Tasks)
 			TasksCompleted += len(Results)
-			logging.info(f"Another {len(Results)} more Tasks completed. Total: {TasksCompleted}")
+			logging.info(f"Dodatnih {len(Results)} taskova završeno. Total: {TasksCompleted}")
 			Results = [await result.json() for result in Results]
 			Results = [result.get("numberOfWords") for result in Results]
 
